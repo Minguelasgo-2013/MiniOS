@@ -13,11 +13,14 @@ setInterval(runClock, 1000);
 
 // Validación de inicio de sesión (1234)
 const loginBtn = document.getElementById('login-btn');
+const loginScreen = document.getElementById('login-screen');
+
 if (loginBtn) {
     loginBtn.addEventListener('click', function() {
         const passInput = document.getElementById('password-input').value;
         if (passInput === "1234") {
-            document.getElementById('login-screen').style.display = 'none';
+            // Ocultamos por completo el login para liberar la pantalla
+            loginScreen.style.setProperty('display', 'none', 'important');
         } else {
             alert("Contraseña de red incorrecta.");
             document.getElementById('password-input').value = "";
@@ -26,19 +29,25 @@ if (loginBtn) {
 }
 
 /* --- LÓGICA PARA ABRIR Y CERRAR EL ARCHIVADOR --- */
-
 const folderIcon = document.getElementById('folder-icon');
+const archivadorWindow = document.getElementById('archivador-window');
+
 if (folderIcon) {
-    // Al hacer doble clic en el icono, se abre el archivador
+    // SOPORTE DOBLE CLIC
     folderIcon.addEventListener('dblclick', function() {
-        document.getElementById('archivador-window').style.display = 'flex';
+        archivadorWindow.style.display = 'flex';
+    });
+
+    // SOPORTE UN SOLO CLIC (Por si falla el doble clic en tu navegador/pantalla)
+    folderIcon.addEventListener('click', function() {
+        archivadorWindow.style.display = 'flex';
     });
 }
 
 const closeArchivadorBtn = document.getElementById('close-archivador-btn');
 if (closeArchivadorBtn) {
-    // Al hacer clic en la "X" (representada por la 'r' en la fuente clásica o texto), se cierra
+    // Al hacer clic en la X se oculta la ventana
     closeArchivadorBtn.addEventListener('click', function() {
-        document.getElementById('archivador-window').style.display = 'none';
+        archivadorWindow.style.display = 'none';
     });
 }
