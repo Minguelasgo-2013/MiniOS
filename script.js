@@ -25,18 +25,20 @@ if (loginBtn) {
     });
 }
 
-// Abrir el explorador de archivos con doble clic en la carpeta CSS
+/* --- LÓGICA PARA ABRIR Y CERRAR EL ARCHIVADOR --- */
+
 const folderIcon = document.getElementById('folder-icon');
 if (folderIcon) {
+    // Al hacer doble clic en el icono, se abre el archivador
     folderIcon.addEventListener('dblclick', function() {
-        document.getElementById('files-window').style.display = 'flex';
+        document.getElementById('archivador-window').style.display = 'flex';
     });
 }
 
-// Cerrar la ventana de archivos
-const closeWindowBtn = document.getElementById('close-window-btn');
-if (closeWindowBtn) {
-    closeWindowBtn.addEventListener('click', function() {
-        document.getElementById('files-window').style.display = 'none';
+const closeArchivadorBtn = document.getElementById('close-archivador-btn');
+if (closeArchivadorBtn) {
+    // Al hacer clic en la "X" (representada por la 'r' en la fuente clásica o texto), se cierra
+    closeArchivadorBtn.addEventListener('click', function() {
+        document.getElementById('archivador-window').style.display = 'none';
     });
 }
