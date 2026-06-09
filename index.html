@@ -12,15 +12,22 @@ button { padding: 4px 15px; background: #c0c0c0; border-top: 2px solid #fff; bor
 .window-body { padding: 10px; flex-grow: 1; background: #fff; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; color: #000; overflow-y: auto; } .file-list { list-style: none; margin-top: 10px; } .file-item { padding: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; } .file-item:hover { background: #000080; color: #fff; }
 .mini-folder-css { position: relative; width: 18px; height: 13px; background: #f1df99; border: 1px solid #7f7f00; border-radius: 0 1px 1px 1px; flex-shrink: 0; } .mini-folder-css::before { content: ""; position: absolute; top: -3px; left: -1px; width: 8px; height: 3px; background: #f1df99; border: 1px solid #7f7f00; border-bottom: none; border-radius: 1px 1px 0 0; }
 #taskbar { width: 100%; height: 40px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; position: absolute; bottom: 0; left: 0; z-index: 50; } #taskbar button { font-weight: bold; height: 28px; padding: 0 10px; } #clock { padding: 4px 10px; background: #c0c0c0; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; color: #000; }
+/* --- NUEVOS ESTILOS BLOC DE NOTAS --- */
+#notepad-win { top: 100px; left: 120px; width: 400px; height: 280px; }
+.notepad-textarea { width: 100%; height: 100%; border: none; resize: none; outline: none; font-family: "Courier New", monospace; font-size: 13px; color: #000; background: #fff; user-select: text; }
 </style></head><body>
 
 <div id="login-screen"><div class="login-card"><div class="window-title"><span>Inicio de Sesión</span><span>X</span></div><div class="login-content"><div class="user-avatar-box"></div><div class="login-form-group"><label>Usuario: <strong>Administrador</strong></label><label for="pass-in">Contraseña:</label><input type="password" id="pass-in" autofocus><button type="button" id="log-btn">Aceptar</button></div></div></div></div>
 
-<div id="desktop"><div class="icon" id="f-icon"><div class="folder-css"></div><span>Archivador</span></div><div class="window" id="arch-win"><div class="window-title"><span>Minguelasgo Archivator</span><div class="close-btn" id="c-arch-btn">X</div></div><div class="window-body"><div>Ruta: C:\Archivador</div><hr style="margin: 8px 0; border: 0; border-top: 1px solid #808080;"><ul class="file-list">
-<li class="file-item"><div class="mini-folder-css"></div><span>Documentos_Secretos</span></li>
-<li class="file-item"><div class="mini-folder-css"></div><span>Proyectos_Propios</span></li>
-<li class="file-item"><div class="mini-folder-css"></div><span>Respaldos_Sistema</span></li>
-</ul></div></div></div>
+<div id="desktop"><div class="icon" id="f-icon"><div class="folder-css"></div><span>Archivador</span></div>
+<div class="window" id="arch-win"><div class="window-title"><span>Minguelasgo Archivator</span><div class="close-btn" id="c-arch-btn">X</div></div><div class="window-body"><div>Ruta: C:\Archivador</div><hr style="margin: 8px 0; border: 0; border-top: 1px solid #808080;"><ul class="file-list">
+<li class="file-item" data-text="CONTENIDO CONFIDENCIAL:\n- El proyecto retro avanza según lo previsto.\n- La clave sigue siendo 1234. No olvidar."><div class="mini-folder-css"></div><span>Documentos_Secretos.txt</span></li>
+<li class="file-item" data-text="NOTAS DE DESARROLLO:\n- Agregadas las subcarpetas con CSS puro.\n- Implementado el Bloc de Notas en líneas gordas."><div class="mini-folder-css"></div><span>Proyectos_Propios.txt</span></li>
+<li class="file-item" data-text="REGISTRO DEL SISTEMA:\n- Nucleo cargado correctamente.\n- Interfaz grafica de Windows 95 operativa al 100%."><div class="mini-folder-css"></div><span>Respaldos_Sistema.txt</span></li>
+</ul></div></div>
+
+<!-- VENTANA DEL BLOC DE NOTAS -->
+<div class="window" id="notepad-win"><div class="window-title"><span id="notepad-title">Bloc de notas - Sin título</span><div class="close-btn" id="c-note-btn">X</div></div><div class="window-body" style="padding:2px;"><textarea class="notepad-textarea" id="note-text" readonly></textarea></div></div></div>
 
 <div id="taskbar"><button type="button">Inicio</button><div id="clock">00:00</div></div>
 
@@ -29,4 +36,11 @@ const runClock = () => { const c = document.getElementById('clock'); const n = n
 const login = () => { if (document.getElementById('pass-in').value === "1234") { document.getElementById('login-screen').style.display = 'none'; } else { alert("Incorrecta"); document.getElementById('pass-in').value = ""; document.getElementById('pass-in').focus(); } };
 document.getElementById('log-btn').addEventListener('click', login); document.getElementById('pass-in').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
 document.getElementById('f-icon').addEventListener('click', () => document.getElementById('arch-win').style.display = 'flex'); document.getElementById('c-arch-btn').addEventListener('click', () => document.getElementById('arch-win').style.display = 'none');
+/* --- LÓGICA DE DETECCIÓN Y APERTURA EN EL BLOC DE NOTAS --- */
+document.querySelectorAll('.file-item').forEach(item => { item.addEventListener('click', () => {
+    document.getElementById('notepad-title').innerText = `Bloc de notas - ${item.querySelector('span').innerText}`;
+    document.getElementById('note-text').value = item.getAttribute('data-text').replace(/\\n/g, '\n');
+    document.getElementById('notepad-win').style.display = 'flex';
+}); });
+document.getElementById('c-note-btn').addEventListener('click', () => document.getElementById('notepad-win').style.display = 'none');
 </script></body></html>
