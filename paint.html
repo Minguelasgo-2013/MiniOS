@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Minguelasgo Paint</title><style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Arial", sans-serif; font-size: 12px; user-select: none; } body, html { width: 100%; height: 100%; overflow: hidden; background-color: #c0c0c0; display: flex; flex-direction: column; padding: 3px; }
+.toolbox { display: flex; gap: 8px; background: #c0c0c0; padding: 6px; align-items: center; border-bottom: 2px solid #808080; } .btn { padding: 4px 8px; background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; cursor: pointer; font-weight: bold; } .btn:active, .btn.active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
+.color-picker { display: flex; gap: 3px; } .color-box { width: 16px; height: 16px; border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #fff; border-bottom: 1px solid #fff; cursor: pointer; }
+.canvas-container { flex-grow: 1; background: #808080; padding: 4px; border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; overflow: auto; display: flex; justify-content: center; align-items: center; }
+canvas { background: #fff; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; cursor: crosshair; }
+</style></head><body>
+<div class="toolbox">
+    <div class="color-picker">
+        <div class="color-box" style="background:#000" onclick="setCol('#000')"></div><div class="color-box" style="background:#808080" onclick="setCol('#808080')"></div><div class="color-box" style="background:#ff0000" onclick="setCol('#ff0000')"></div><div class="color-box" style="background:#00ff00" onclick="setCol('#00ff00')"></div><div class="color-box" style="background:#0000ff" onclick="setCol('#0000ff')"></div><div class="color-box" style="background:#ffff00" onclick="setCol('#ffff00')"></div><div class="color-box" style="background:#ff00ff" onclick="setCol('#ff00ff')"></div><div class="color-box" style="background:#00ffff" onclick="setCol('#00ffff')"></div>
+    </div>
+    <button class="btn active" id="p-btn" onclick="useTool('brush')">Pincel</button><button class="btn" id="e-btn" onclick="useTool('eraser')">Goma</button><button class="btn" onclick="clearCanvas()">Borrar Todo</button>
+</div>
+<div class="canvas-container"><canvas id="paintCanvas" width="460" height="340"></canvas></div>
+<script>
+const canvas=document.getElementById('paintCanvas'),ctx=canvas.getContext('2d'); let drawing=false,color='#000',size=4,tool='brush';
+canvas.addEventListener('mousedown',(e)=>{drawing=true;draw(e);}); canvas.addEventListener('mousemove',draw); window.addEventListener('mouseup',()=>{drawing=false;ctx.beginPath();});
+function draw(e){if(!drawing)return;const rect=canvas.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;ctx.lineWidth=size;ctx.lineCap='round';ctx.strokeStyle=tool==='eraser'?'#ffffff':color;ctx.lineTo(x,y);ctx.stroke();ctx.beginPath();ctx.moveTo(x,y);}
+function setCol(c){color=c;useTool('brush');} function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);}
+function useTool(t){tool=t;document.getElementById('p-btn').classList.toggle('active',t==='brush');document.getElementById('e-btn').classList.toggle('active',t==='eraser');size=t==='eraser'?20:4;}
+</script></body></html>
