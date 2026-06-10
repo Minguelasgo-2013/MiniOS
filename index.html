@@ -387,7 +387,7 @@
                 </div>
             </div>
             <div class="window-body" style="padding:0;">
-                <iframe class="iframe-nav" src="about:blank"></iframe>
+                <iframe class="iframe-nav" src="nav.html"></iframe>
             </div>
         </div>
 
@@ -402,21 +402,21 @@
                 </div>
             </div>
             <div class="window-body" style="padding:5px;">
-                <canvas id="paint-canvas" style="width:100%; height:100%; background:#fff; border:1px solid #808080;"></canvas>
+                <iframe class="iframe-nav" src="paint.html"></iframe>
             </div>
         </div>
         <!-- Ventana: Contenedor del Juego -->
         <div class="window" id="game-win">
             <div class="window-title">
-                <span>Contenedor de Juego</span>
+                <span>The Sims Life</span>
                 <div class="win-controls">
                     <div class="win-btn" onclick="minimizeWin('game-win')">_</div>
                     <div class="win-btn" onclick="maximizeWin('game-win')">🗖</div>
                     <div class="win-btn" onclick="closeWin('game-win')">X</div>
                 </div>
             </div>
-            <div class="window-body">
-                <!-- METE AQUÍ EL CONTENIDO INTERNO DE TU JUEGO -->
+            <div class="window-body" style="padding:0;">
+                <iframe class="iframe-nav" src="LosMins.html"></iframe>
             </div>
         </div>
     </div> <!-- Cierre de #desktop -->
@@ -446,9 +446,9 @@
         // Activación y enlazado correcto de todas las aplicaciones
         setupIcon('f-icon', 'arch-win');
         setupIcon('n-icon', 'notepad-win');
-        setupIcon('nav-icon', 'm-nav-win');    // Vinculado correctamente
-        setupIcon('paint-icon', 'paint-win');  // Vinculado correctamente
-        setupIcon('game-icon', 'game-win');    // Tu nuevo juego enlazado
+        setupIcon('nav-icon', 'm-nav-win');
+        setupIcon('paint-icon', 'paint-win');
+        setupIcon('game-icon', 'game-win');
 
         // Funciones básicas para los botones de las ventanas
         function closeWin(id) { 
