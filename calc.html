@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Arial", sans-serif; font-size: 14px; user-select: none; }
+        body { background: #c0c0c0; padding: 8px; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 8px; }
+        #display { width: 100%; height: 40px; background: #fff; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; text-align: right; padding: 10px; font-size: 18px; font-family: monospace; color: #000; overflow: hidden; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; flex-grow: 1; }
+        button { background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; cursor: pointer; font-weight: bold; }
+        button:active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
+    </style>
+</head>
+<body>
+    <div id="display">0</div>
+    <div class="grid">
+        <button onclick="clearD()">C</button> <button onclick="press('/')">/</button> <button onclick="press('*')">*</button> <button onclick="press('-')">-</button>
+        <button onclick="press('7')">7</button> <button onclick="press('8')">8</button> <button onclick="press('9')">9</button> <button onclick="press('+')" style="grid-row: span 2; height: 100%;">+</button>
+        <button onclick="press('4')">4</button> <button onclick="press('5')">5</button> <button onclick="press('6')">6</button>
+        <button onclick="press('1')">1</button> <button onclick="press('2')">2</button> <button onclick="press('3')">3</button> <button onclick="calc()" style="grid-row: span 2; height: 100%;">=</button>
+        <button onclick="press('0')" style="grid-column: span 2;">0</button> <button onclick="press('.')">.</button>
+    </div>
+    <script>
+        let d = document.getElementById('display'); let expr = '';
+        function press(v) { if(expr==='' && !isNaN(v)) d.innerText=''; expr+=v; d.innerText+=v; }
+        function clearD() { expr=''; d.innerText='0'; }
+        function calc() { try { let res = eval(expr); d.innerText = res; expr = String(res); } catch(e) { d.innerText='Error'; expr=''; } }
+    </script>
+</body>
+</html>
