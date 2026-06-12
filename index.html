@@ -1,90 +1,101 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-}
-body {
-    background: #008080;
-    font-family: sans-serif;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-}
-.desktop {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    height: calc(100vh - 40px);
-}
-.icon {
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    color: #fff;
-    font-size: 12px;
-    text-shadow: 1px 1px 1px #000;
-}
-.icon img, .icon .folder-css, .icon .nav-css {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 5px;
-}
-.folder-css {
-    background: #ffd700;
-    border-radius: 2px;
-    border: 1px solid #b8860b;
-}
-.window {
-    background: #c0c0c0;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    z-index: 10;
-}
-.window-title {
-    background: #000080;
-    color: #fff;
-    padding: 4px 8px;
-    font-weight: bold;
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.win-controls {
-    display: flex;
-    gap: 4px;
-}
-.win-btn {
-    background: #c0c0c0;
-    color: #000;
-    border-top: 1px solid #fff;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.win-btn:active {
-    border-top: 1px solid #000;
-    border-left: 1px solid #000;
-    border-right: 1px solid #fff;
-    border-bottom: 1px solid #fff;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini OS 95</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        body {
+            background: #008080;
+            font-family: sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .desktop {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            height: calc(100vh - 40px);
+        }
+        .icon {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 12px;
+            text-shadow: 1px 1px 1px #000;
+        }
+        .icon img, .icon .folder-css, .icon .nav-css {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 5px;
+        }
+        .folder-css {
+            background: #ffd700;
+            border-radius: 2px;
+            border: 1px solid #b8860b;
+        }
+        .window {
+            background: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #000;
+            border-bottom: 2px solid #000;
+            box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .window-title {
+            background: #000080;
+            color: #fff;
+            padding: 4px 8px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .win-controls {
+            display: flex;
+            gap: 4px;
+        }
+        .win-btn {
+            background: #c0c0c0;
+            color: #000;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .win-btn:active {
+            border-top: 1px solid #000;
+            border-left: 1px solid #000;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+
 <div class="desktop">
     <!-- Icono: Archivador -->
     <div class="icon" id="f-icon" onclick="openWin('archivador-win')">
@@ -121,7 +132,7 @@ body {
         <iframe src="calc.html" style="width: 100%; height: calc(100% - 22px); border: none; background: #c0c0c0;"></iframe>
     </div>
 
-    <!-- Ventana Inalámbrica: Terminal ACTUALIZADA -->
+    <!-- Ventana Inalámbrica: Terminal -->
     <div class="window" id="cmd-win" style="position: absolute; top: 80px; left: 100px; width: 650px; height: 420px; display: none;">
         <div class="window-title">
             <span>Terminal de Comandos MS-DOS</span>
@@ -129,32 +140,33 @@ body {
                 <div class="win-btn" onclick="closeWin('cmd-win')">X</div>
             </div>
         </div>
-        <!-- UNIÓN INALÁMBRICA PERFECTA -->
         <iframe src="terminal.html" style="width: 100%; height: calc(100% - 22px); border: none; background: #0c0c0c;"></iframe>
     </div>
 </div>
-// Función para abrir ventanas con soporte de zIndex básico
-function openWin(id) {
-    const win = document.getElementById(id);
-    if (win) {
-        win.style.display = "block";
-        // Trae la ventana seleccionada al frente
-        win.style.zIndex = "100"; 
-    }
-}
 
-// Función para cerrar ventanas de forma limpia
-function closeWin(id) {
-    const win = document.getElementById(id);
-    if (win) {
-        win.style.display = "none";
+<script>
+    function openWin(id) {
+        const win = document.getElementById(id);
+        if (win) {
+            win.style.display = "block";
+            win.style.zIndex = "100"; 
+        }
     }
-}
 
-// Funciones opcionales para maximizar y minimizar
-function minimizeWin(id) {
-    const win = document.getElementById(id);
-    if (win) {
-        win.style.display = "none";
+    function closeWin(id) {
+        const win = document.getElementById(id);
+        if (win) {
+            win.style.display = "none";
+        }
     }
-}
+
+    function minimizeWin(id) {
+        const win = document.getElementById(id);
+        if (win) {
+            win.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
